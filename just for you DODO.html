@@ -1,0 +1,1582 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="theme-color" content="#080816">
+  <!-- Home Screen Web App & Custom Icon Config (All Phones: iOS & Android) -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="DODO ✦">
+  <meta name="mobile-web-app-capable" content="yes">
+  <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0%25' stop-color='%23ff5db1'/%3E%3Cstop offset='55%25' stop-color='%23a78bfa'/%3E%3Cstop offset='100%25' stop-color='%2367e8f9'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='180' height='180' rx='42' fill='%23080816'/%3E%3Crect x='10' y='10' width='160' height='160' rx='34' fill='url(%23g)' opacity='0.22'/%3E%3Ctext x='90' y='108' font-size='74' text-anchor='middle' fill='%23ffffff' font-family='sans-serif' font-weight='900'%3E✦%3C/text%3E%3Ctext x='90' y='146' font-size='22' text-anchor='middle' fill='%23ffc1e5' font-family='sans-serif' font-weight='800' letter-spacing='3'%3EDODO%3C/text%3E%3C/svg%3E">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'%3E%3Crect width='180' height='180' rx='42' fill='%23080816'/%3E%3Ctext x='90' y='118' font-size='92' text-anchor='middle' fill='%23ff5db1'%3E✦%3C/text%3E%3C/svg%3E">
+  <title>Just For You</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&family=Outfit:wght@400;500;600;700;800;900&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --bg: #080816;
+      --pink: #ff5db1;
+      --violet: #a78bfa;
+      --cyan: #67e8f9;
+      --white: #f8f7ff;
+      --muted: #aaa8c4;
+      --glass: rgba(255, 255, 255, 0.055);
+      --glass-border: rgba(255, 255, 255, 0.14);
+    }
+
+    * {
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #080816;
+      background: var(--bg);
+      color: var(--white);
+      font-family: 'Cairo', sans-serif;
+      overflow-x: hidden;
+      min-height: 100svh;
+      scroll-behavior: smooth;
+    }
+
+    /* Deep Cosmic Multi-layered Gradients */
+    body:before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      background:
+        radial-gradient(ellipse at 14% 16%, rgba(255, 93, 177, 0.24), transparent 44%),
+        radial-gradient(ellipse at 86% 28%, rgba(103, 232, 249, 0.19), transparent 42%),
+        radial-gradient(ellipse at 50% 96%, rgba(167, 139, 250, 0.26), transparent 48%);
+    }
+
+    /* Interactive Cursor Spotlight */
+    #spotlight {
+      position: fixed;
+      width: 560px;
+      height: 560px;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 1;
+      transform: translate(-50%, -50%);
+      background: radial-gradient(circle, rgba(255, 93, 177, 0.16) 0%, rgba(167, 139, 250, 0.09) 42%, transparent 72%);
+      transition: opacity 0.3s ease;
+    }
+
+    /* Subtle Film Grain Texture */
+    .grain {
+      position: fixed;
+      inset: 0;
+      z-index: 25;
+      pointer-events: none;
+      opacity: 0.045;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.6'/%3E%3C/svg%3E");
+    }
+
+    /* Confetti Canvas */
+    #confetti {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 40;
+    }
+
+    /* Top Scroll Progress Bar */
+    #scrollProgress {
+      position: fixed;
+      top: 0;
+      right: 0;
+      height: 3px;
+      width: 0%;
+      z-index: 50;
+      background: linear-gradient(90deg, var(--pink), var(--violet), var(--cyan));
+      box-shadow: 0 0 14px var(--pink);
+      transition: width 0.12s ease-out;
+    }
+
+    /* Ambient Floating Glowing Orbs & Twinkling Sparks */
+    .ambient-layer {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 1;
+      overflow: hidden;
+    }
+
+    .orb-wrap {
+      position: absolute;
+      inset: 0;
+      will-change: transform;
+      transition: transform 0.25s ease-out;
+    }
+
+    .orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(2px);
+      animation: floatOrb 8s ease-in-out infinite;
+    }
+
+    .orb.one {
+      width: 320px;
+      height: 320px;
+      top: 7%;
+      left: 5%;
+      background: radial-gradient(circle at 35% 35%, rgba(255, 93, 177, 0.45), rgba(255, 93, 177, 0) 68%);
+    }
+
+    .orb.two {
+      width: 380px;
+      height: 380px;
+      right: 3%;
+      bottom: 4%;
+      background: radial-gradient(circle at 50% 50%, rgba(167, 139, 250, 0.38), rgba(167, 139, 250, 0) 70%);
+      animation-delay: -3s;
+    }
+
+    .orb.three {
+      width: 190px;
+      height: 190px;
+      right: 17%;
+      top: 13%;
+      background: radial-gradient(circle, rgba(103, 232, 249, 0.36), transparent 70%);
+      animation-delay: -1.5s;
+    }
+
+    .orb.four {
+      width: 250px;
+      height: 250px;
+      left: 14%;
+      bottom: 11%;
+      background: radial-gradient(circle at 40% 40%, rgba(255, 141, 201, 0.3), transparent 70%);
+      animation-delay: -4.5s;
+    }
+
+    .spark {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: #fff;
+      box-shadow: 0 0 16px #ffc5f2, 0 0 28px #a78bfa;
+      animation: twinkle 3s infinite;
+    }
+
+    /* Artistic Giant Typography Backdrop ("JUST FOR YOU") */
+    .bg-watermark-wrap {
+      position: fixed;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      pointer-events: none;
+      z-index: 1;
+      overflow: hidden;
+      user-select: none;
+      will-change: transform;
+      transition: transform 0.2s ease-out;
+    }
+
+    .bg-watermark {
+      font-family: 'Outfit', sans-serif;
+      font-weight: 900;
+      font-size: clamp(64px, 14.5vw, 220px);
+      line-height: 0.92;
+      letter-spacing: -2px;
+      text-align: center;
+      text-transform: uppercase;
+      white-space: nowrap;
+      background: linear-gradient(125deg,
+          rgba(255, 255, 255, 0.065) 0%,
+          rgba(255, 93, 177, 0.12) 45%,
+          rgba(167, 139, 250, 0.12) 75%,
+          rgba(103, 232, 249, 0.08) 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      -webkit-text-stroke: 1.3px rgba(255, 255, 255, 0.095);
+      filter: drop-shadow(0 0 42px rgba(255, 93, 177, 0.14));
+      animation: watermarkBreathe 9s ease-in-out infinite;
+    }
+
+    .bg-watermark span {
+      display: block;
+      font-size: 0.42em;
+      letter-spacing: 0.36em;
+      margin-top: 12px;
+      -webkit-text-stroke: 1px rgba(255, 155, 207, 0.12);
+    }
+
+    button {
+      font: inherit;
+    }
+
+    /* Top Navigation Bar */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px clamp(18px, 5vw, 68px);
+      z-index: 30;
+      background: linear-gradient(to bottom, rgba(8, 8, 22, 0.85), transparent);
+      backdrop-filter: blur(8px);
+    }
+
+    .logo {
+      font-family: 'Outfit', sans-serif;
+      font-weight: 800;
+      letter-spacing: 1px;
+      font-size: 19px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .logo span {
+      color: var(--pink);
+    }
+
+    /* Page Step Indicator Pills */
+    .nav-steps {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      padding: 6px 14px;
+      border-radius: 99px;
+      backdrop-filter: blur(12px);
+    }
+
+    .step-dot {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      border: 1px solid transparent;
+      background: transparent;
+      color: var(--muted);
+      font-family: 'Outfit', sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      display: grid;
+      place-items: center;
+      transition: all 0.3s ease;
+    }
+
+    .step-dot:hover {
+      color: var(--white);
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .step-dot.active {
+      background: linear-gradient(120deg, var(--pink), var(--violet));
+      color: #0e091b;
+      box-shadow: 0 0 18px rgba(255, 93, 177, 0.55);
+      transform: scale(1.08);
+    }
+
+    /* SPA Pages Container */
+    main {
+      position: relative;
+      z-index: 10;
+      min-height: 100svh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 96px 20px 80px;
+    }
+
+    .page {
+      display: none;
+      max-width: 1040px;
+      width: 100%;
+      margin: 0 auto;
+    }
+
+    .page.active {
+      display: block;
+    }
+
+    /* Visible by default so page is NEVER white, with smooth entry */
+    .reveal-item {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      transition:
+        opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1),
+        transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .float-slow {
+      animation: gentleFloat 5.5s ease-in-out infinite;
+    }
+
+    /* Compact Inline Shortcut Install Banner (English - All Phones) */
+    .install-toast {
+      position: relative;
+      width: min(94%, 440px);
+      margin: 0 auto 22px;
+      z-index: 20;
+      direction: ltr;
+      text-align: left;
+      font-family: 'Outfit', sans-serif;
+      background: linear-gradient(145deg, rgba(18, 16, 42, 0.92), rgba(30, 24, 62, 0.88));
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border: 1px solid rgba(103, 232, 249, 0.32);
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.45), 0 0 20px rgba(255, 93, 177, 0.16);
+      border-radius: 20px;
+      padding: 12px 14px;
+      max-height: 240px;
+      overflow: hidden;
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      transition:
+        max-height 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+        opacity 0.4s ease,
+        margin 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+        padding 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+        transform 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+        border-width 0.4s ease;
+    }
+
+    .install-toast.hiding {
+      max-height: 0;
+      opacity: 0;
+      margin-top: 0;
+      margin-bottom: 0;
+      padding-top: 0;
+      padding-bottom: 0;
+      border-width: 0;
+      transform: translateY(-12px) scale(0.95);
+      pointer-events: none;
+    }
+
+    .install-top-row {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      margin-bottom: 9px;
+    }
+
+    .app-icon-preview {
+      width: 38px;
+      height: 38px;
+      border-radius: 10px;
+      flex-shrink: 0;
+      background: linear-gradient(135deg, #1b1538, #080816);
+      border: 1px solid rgba(255, 93, 177, 0.55);
+      box-shadow: 0 0 14px rgba(255, 93, 177, 0.32);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-weight: 900;
+      font-size: 14px;
+      line-height: 1;
+    }
+
+    .app-icon-preview span {
+      font-size: 7px;
+      letter-spacing: 1.2px;
+      color: #ffc1e5;
+      margin-top: 2px;
+    }
+
+    .install-title-group {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .install-title-group h4 {
+      margin: 0 0 2px;
+      font-size: 13.5px;
+      font-weight: 800;
+      color: #fff;
+    }
+
+    .install-desc {
+      margin: 0;
+      font-size: 11.5px;
+      line-height: 1.4;
+      color: #cfcbe6;
+    }
+
+    .install-bottom-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.09);
+      border-radius: 13px;
+      padding: 6px 8px 6px 10px;
+    }
+
+    .install-steps-inline {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 6px;
+      font-size: 11px;
+      color: #e4e0f8;
+    }
+
+    .step-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-weight: 600;
+    }
+
+    .step-chip svg {
+      width: 13px;
+      height: 13px;
+      stroke: var(--pink);
+      fill: none;
+      stroke-width: 2.2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .btn-install-ok {
+      border: 0;
+      border-radius: 99px;
+      padding: 6px 16px;
+      font-size: 11.5px;
+      font-weight: 800;
+      letter-spacing: 0.6px;
+      cursor: pointer;
+      flex-shrink: 0;
+      color: #0e091b;
+      background: linear-gradient(110deg, #ff8dc9, #c3a4ff 60%, #85ecf7);
+      box-shadow: 0 3px 12px rgba(255, 93, 177, 0.4);
+      transition: transform 0.2s ease;
+    }
+
+    .btn-install-ok:active {
+      transform: scale(0.95);
+    }
+
+    .browser-pointer-cue {
+      position: fixed;
+      z-index: 65;
+      display: none;
+      align-items: center;
+      gap: 8px;
+      direction: ltr;
+      font-family: 'Outfit', sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      color: #fff;
+      background: rgba(16, 14, 38, 0.94);
+      border: 1px solid var(--pink);
+      padding: 9px 14px;
+      border-radius: 99px;
+      box-shadow: 0 10px 30px rgba(255, 93, 177, 0.45);
+      animation: bounceCue 1.2s infinite;
+    }
+
+    .browser-pointer-cue.safari-pos {
+      bottom: 18px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .browser-pointer-cue.chrome-pos {
+      top: 14px;
+      right: 16px;
+    }
+
+    /* Typography & Shared Components */
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      border: 1px solid #ffffff24;
+      background: #ffffff0c;
+      backdrop-filter: blur(10px);
+      padding: 8px 16px;
+      border-radius: 100px;
+      color: #ddd7f8;
+      font-size: 12px;
+      letter-spacing: 0.4px;
+    }
+
+    .dot {
+      width: 7px;
+      height: 7px;
+      background: var(--cyan);
+      border-radius: 50%;
+      box-shadow: 0 0 16px var(--cyan);
+    }
+
+    .kicker {
+      color: var(--pink);
+      font-family: 'Outfit', sans-serif;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      font-size: 11px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .gradient {
+      background: linear-gradient(100deg, #fff 4%, #ffc1e5 34%, #bdabff 66%, #7cecff 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      filter: drop-shadow(0 0 34px #d64caa38);
+    }
+
+    .section-head {
+      text-align: center;
+      margin-bottom: 38px;
+    }
+
+    .section-head h2 {
+      font-size: clamp(28px, 5vw, 48px);
+      line-height: 1.3;
+      margin: 6px 0 10px;
+      font-weight: 900;
+    }
+
+    .section-head p {
+      color: #c2bfd8;
+      font-size: clamp(14px, 1.8vw, 17px);
+      line-height: 1.85;
+      max-width: 560px;
+      margin: 0 auto;
+    }
+
+    /* Buttons */
+    .actions {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 30px;
+    }
+
+    .btn {
+      border: 0;
+      border-radius: 100px;
+      padding: 13px 24px;
+      font-weight: 800;
+      font-size: 15px;
+      cursor: pointer;
+      transition: transform 0.25s, box-shadow 0.25s, background 0.25s;
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+    }
+
+    .btn:hover {
+      transform: translateY(-3px);
+    }
+
+    .btn:active {
+      transform: scale(0.97);
+    }
+
+    .primary {
+      color: #100b1d;
+      background: linear-gradient(110deg, #ff8dc9, #c3a4ff 65%, #85ecf7);
+      box-shadow: 0 8px 32px #d25db744;
+    }
+
+    .primary:hover {
+      box-shadow: 0 12px 38px #d25db766;
+    }
+
+    .secondary {
+      background: #ffffff0c;
+      border: 1px solid #ffffff26;
+      color: #f5f1ff;
+      backdrop-filter: blur(12px);
+    }
+
+    .secondary:hover {
+      background: #ffffff18;
+      border-color: #ffffff40;
+    }
+
+    /* ================= PAGE 1: HERO ================= */
+    .hero-box {
+      text-align: center;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 10px 0 20px;
+    }
+
+    .hero-box h1 {
+      font-size: clamp(38px, 7.6vw, 88px);
+      line-height: 1.18;
+      letter-spacing: -1.5px;
+      margin: 22px 0 18px;
+      font-weight: 900;
+    }
+
+    .hero-box .subtitle {
+      color: #c9c6e0;
+      font-size: clamp(15px, 2vw, 19px);
+      line-height: 1.95;
+      max-width: 600px;
+      margin: 0 auto 32px;
+    }
+
+    /* Click Magic Sparkles */
+    .click-sparkle {
+      position: fixed;
+      pointer-events: none;
+      z-index: 45;
+      font-size: 16px;
+      animation: burstSparkle 0.95s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    /* ================= PAGE 2: INTERACTIVE CAKE & SECRET ENVELOPE ================= */
+    .cake-stage {
+      max-width: 740px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .cake-container {
+      position: relative;
+      width: 220px;
+      height: 190px;
+      margin: 16px auto 24px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-end;
+      cursor: pointer;
+    }
+
+    .candle {
+      position: relative;
+      width: 14px;
+      height: 46px;
+      background: repeating-linear-gradient(45deg, #fff, #fff 5px, var(--pink) 5px, var(--pink) 10px);
+      border-radius: 4px 4px 0 0;
+      z-index: 3;
+    }
+
+    .flame {
+      position: absolute;
+      top: -28px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 16px;
+      height: 26px;
+      background: radial-gradient(ellipse at bottom, #fff 10%, #ffe29a 45%, #ff7b00 85%, transparent 100%);
+      border-radius: 50% 50% 35% 35%;
+      box-shadow: 0 0 24px #ffae34, 0 0 48px rgba(255, 93, 177, 0.65);
+      animation: flicker 0.18s infinite alternate;
+      transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+
+    .flame.out {
+      opacity: 0;
+      transform: translateX(-50%) scale(0.1);
+      animation: none;
+    }
+
+    .smoke {
+      position: absolute;
+      top: -32px;
+      left: 50%;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: rgba(230, 230, 250, 0.75);
+      filter: blur(3px);
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .smoke.rising {
+      animation: smokeRise 1.8s ease-out forwards;
+    }
+
+    .cake-top-tier {
+      width: 132px;
+      height: 44px;
+      background: linear-gradient(135deg, #ff8dc9, #c3a4ff);
+      border-radius: 14px 14px 4px 4px;
+      position: relative;
+      box-shadow: inset 0 -6px 0 rgba(0, 0, 0, 0.12);
+    }
+
+    .cake-top-tier:after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 12px;
+      background: #fff7fc;
+      border-radius: 14px 14px 8px 8px;
+    }
+
+    .cake-bottom-tier {
+      width: 188px;
+      height: 54px;
+      background: linear-gradient(135deg, #a78bfa, #67e8f9);
+      border-radius: 14px 14px 8px 8px;
+      position: relative;
+      box-shadow: 0 14px 30px rgba(0, 0, 0, 0.45);
+    }
+
+    .cake-bottom-tier:after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 14px;
+      background: #fff7fc;
+      border-radius: 14px 14px 10px 10px;
+    }
+
+    .cake-plate {
+      width: 218px;
+      height: 10px;
+      background: rgba(255, 255, 255, 0.28);
+      border-radius: 99px;
+      margin-top: 2px;
+    }
+
+    /* Final Letter Card */
+    .final-letter {
+      margin-top: 24px;
+      padding: clamp(24px, 5vw, 42px);
+      border-radius: 30px;
+      border: 1px solid rgba(255, 93, 177, 0.4);
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.03));
+      backdrop-filter: blur(16px);
+      position: relative;
+      overflow: hidden;
+      display: none;
+      animation: popIn 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    .final-letter.visible {
+      display: block;
+    }
+
+    .final-letter .quote {
+      font-size: clamp(16px, 2.3vw, 20px);
+      line-height: 1.95;
+      font-weight: 600;
+      margin: 0 auto 16px;
+    }
+
+    .final-letter .quote em {
+      font-style: normal;
+      color: #ff9bcf;
+    }
+
+    .final-letter .sign {
+      font-size: 13px;
+      color: #c6c1e2;
+    }
+
+    /* Secret Wax-Sealed Envelope */
+    .secret-envelope-wrap {
+      margin-top: 26px;
+      display: none;
+      animation: popIn 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    .secret-envelope-wrap.visible {
+      display: block;
+    }
+
+    .envelope-box {
+      max-width: 580px;
+      margin: 0 auto;
+      padding: 24px;
+      border-radius: 26px;
+      border: 1px dashed rgba(255, 93, 177, 0.55);
+      background: linear-gradient(145deg, rgba(255, 93, 177, 0.12), rgba(167, 139, 250, 0.1));
+      backdrop-filter: blur(14px);
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .envelope-box:hover:not(.unsealed) {
+      transform: translateY(-5px);
+      box-shadow: 0 14px 35px rgba(255, 93, 177, 0.22);
+    }
+
+    .wax-seal {
+      width: 56px;
+      height: 56px;
+      margin: 0 auto 12px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 30%, #ff7ec3, #c92a7c);
+      box-shadow: 0 6px 20px rgba(255, 93, 177, 0.55), inset 0 2px 4px rgba(255, 255, 255, 0.4);
+      display: grid;
+      place-items: center;
+      font-size: 24px;
+      color: #fff;
+      animation: beat 1.6s infinite;
+    }
+
+    .envelope-secret-content {
+      display: none;
+      margin-top: 10px;
+      padding-top: 14px;
+      border-top: 1px solid rgba(255, 255, 255, 0.15);
+      animation: popIn 0.55s ease forwards;
+    }
+
+    .envelope-box.unsealed {
+      cursor: default;
+      border-style: solid;
+      border-color: rgba(103, 232, 249, 0.55);
+    }
+
+    .envelope-box.unsealed .wax-seal {
+      animation: none;
+      background: linear-gradient(135deg, var(--cyan), var(--violet));
+    }
+
+    .envelope-box.unsealed .envelope-closed-hint {
+      display: none;
+    }
+
+    .envelope-box.unsealed .envelope-secret-content {
+      display: block;
+    }
+
+    /* Footer */
+    footer {
+      position: relative;
+      z-index: 10;
+      text-align: center;
+      padding: 18px;
+      font-size: 11px;
+      color: #827ea0;
+      letter-spacing: 0.5px;
+    }
+
+    .heart {
+      color: #ff77b8;
+      display: inline-block;
+      animation: beat 1.3s infinite;
+    }
+
+    /* Keyframe Animations */
+    @keyframes popIn {
+      from {
+        opacity: 0;
+        transform: scale(0.9) translateY(14px);
+      }
+
+      to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+      }
+    }
+
+    @keyframes floatOrb {
+      0%,
+      100% {
+        transform: translate(0, 0) scale(1);
+      }
+
+      50% {
+        transform: translate(22px, -28px) scale(1.06);
+      }
+    }
+
+    @keyframes gentleFloat {
+      0%,
+      100% {
+        transform: translateY(0px);
+      }
+
+      50% {
+        transform: translateY(-7px);
+      }
+    }
+
+    @keyframes twinkle {
+      0%,
+      100% {
+        opacity: 0.15;
+        transform: scale(0.7);
+      }
+
+      50% {
+        opacity: 1;
+        transform: scale(1.5);
+      }
+    }
+
+    @keyframes beat {
+      0%,
+      100% {
+        transform: scale(1);
+      }
+
+      50% {
+        transform: scale(1.22);
+      }
+    }
+
+    @keyframes flicker {
+      from {
+        transform: translateX(-50%) scale(1) rotate(-2deg);
+      }
+
+      to {
+        transform: translateX(-50%) scale(1.08, 0.94) rotate(2deg);
+      }
+    }
+
+    @keyframes smokeRise {
+      0% {
+        opacity: 0.85;
+        transform: translate(-50%, 0) scale(1);
+      }
+
+      100% {
+        opacity: 0;
+        transform: translate(-35%, -60px) scale(3.4);
+      }
+    }
+
+    @keyframes burstSparkle {
+      0% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(0.4);
+      }
+
+      100% {
+        opacity: 0;
+        transform: translate(calc(-50% + var(--dx)), calc(-50% + var(--dy))) scale(1.3);
+      }
+    }
+
+    @keyframes watermarkBreathe {
+      0%,
+      100% {
+        transform: scale(1) translateY(0px) rotate(-1.5deg);
+        opacity: 0.92;
+      }
+
+      50% {
+        transform: scale(1.04) translateY(-10px) rotate(-0.5deg);
+        opacity: 1;
+      }
+    }
+
+    @keyframes bounceCue {
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-6px);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .hero-box h1 {
+        letter-spacing: -0.5px;
+      }
+
+      .orb.one {
+        left: -80px;
+        width: 240px;
+        height: 240px;
+      }
+
+      .orb.two {
+        right: -100px;
+        width: 280px;
+        height: 280px;
+      }
+
+      .bg-watermark {
+        white-space: normal;
+        font-size: clamp(54px, 17vw, 110px);
+        line-height: 1.02;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Scroll Progress Line -->
+  <div id="scrollProgress"></div>
+
+  <!-- Browser Share / Menu Cue -->
+  <div class="browser-pointer-cue" id="browserPointerCue"></div>
+
+  <!-- Grain, Spotlight & Confetti -->
+  <div class="grain"></div>
+  <div id="spotlight"></div>
+  <canvas id="confetti"></canvas>
+
+  <!-- Ambient Floating Glowing Orbs & Twinkling Sparks -->
+  <div class="ambient-layer" aria-hidden="true">
+    <div class="orb-wrap" id="orbParallax">
+      <div class="orb one"></div>
+      <div class="orb two"></div>
+      <div class="orb three"></div>
+      <div class="orb four"></div>
+    </div>
+    <div class="spark" style="top:16%;left:18%;animation-delay:.2s"></div>
+    <div class="spark" style="top:68%;left:14%;animation-delay:1.1s"></div>
+    <div class="spark" style="top:26%;right:18%;animation-delay:1.7s"></div>
+    <div class="spark" style="top:76%;right:22%;animation-delay:.7s"></div>
+    <div class="spark" style="top:46%;left:8%;animation-delay:2.2s"></div>
+    <div class="spark" style="top:54%;right:10%;animation-delay:1.4s"></div>
+    <div class="spark" style="top:84%;left:45%;animation-delay:0.9s"></div>
+  </div>
+
+  <!-- Artistic Giant Typography Backdrop ("JUST FOR YOU") -->
+  <div class="bg-watermark-wrap" id="watermarkParallax" aria-hidden="true">
+    <div class="bg-watermark">
+      JUST FOR YOU
+      <span>✦ Donia ✦</span>
+    </div>
+  </div>
+
+  <!-- Clean Top Navigation Bar -->
+  <nav>
+    <div class="logo" onclick="goToPage(1)">Do<span></span>DO</div>
+
+    <!-- Interactive Page Steps (2 Pages Only) -->
+    <div class="nav-steps" aria-label="تنقل بين الصفحات">
+      <button class="step-dot active" data-step="1" onclick="goToPage(1)" title="البداية">1</button>
+      <button class="step-dot" data-step="2" onclick="goToPage(2)" title="التورتة والأمنية">2</button>
+    </div>
+  </nav>
+
+  <main>
+    <!-- ==================== PAGE 1: HERO & WELCOME ==================== -->
+    <section class="page active" id="page-1">
+      <div class="hero-box">
+        <!-- Compact Shortcut Install Prompt (Above Heading - Collapses Smoothly on OK) -->
+        <aside class="install-toast" id="installToast" role="dialog" aria-label="Add to Home Screen">
+          <div class="install-top-row">
+            <div class="app-icon-preview">✦<span>DODO</span></div>
+            <div class="install-title-group">
+              <h4>Pin DODO ✦ to Your Home Screen</h4>
+              <p class="install-desc" id="installDescText">Add as a home screen shortcut on any phone for 1-tap access.</p>
+            </div>
+          </div>
+          <div class="install-bottom-row">
+            <div class="install-steps-inline" id="installStepsText">
+              <span class="step-chip">
+                <svg viewBox="0 0 24 24"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
+                1. Menu / Share
+              </span>
+              <span style="opacity:0.4;">→</span>
+              <span class="step-chip">
+                <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="4"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
+                2. Add to Home Screen
+              </span>
+            </div>
+            <button class="btn-install-ok" id="installOkBtn" onclick="handleInstallOk()">OK ✦</button>
+          </div>
+        </aside>
+
+        <div class="eyebrow reveal-item"><span class="dot"></span>23/11/2005</div>
+        <h1 class="reveal-item float-slow">كل سنة وأنتي<br><span class="gradient">'طيبة </span></h1>
+        <p class="subtitle reveal-item">
+          اشطر Network Engineer في الدنيا
+        </p>
+        <div class="actions reveal-item">
+          <button class="btn primary" onclick="triggerConfetti(); playChime('celebrate')">click<span>✦</span></button>
+          <button class="btn secondary" onclick="startJourney()">اطفي الشمعة 🎂 <span>←</span></button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== PAGE 2: INTERACTIVE CAKE & SECRET ENVELOPE ==================== -->
+    <section class="page" id="page-2">
+      <div class="cake-stage">
+        <div class="section-head reveal-item" style="margin-bottom: 16px;">
+          <div class="kicker">MAKE A WISH</div>
+          <h2>اتمني أمنية <span class="gradient">واطفي الشمعة</span></h2>
+          <p id="cakeInstruction">غمّضي عينيكِ ثانية، اتمني أمنيتك، واضغطي على الشمعة.</p>
+        </div>
+
+        <!-- Interactive Birthday Cake -->
+        <div class="cake-container reveal-item float-slow" onclick="blowCandle()" title="اضغطي لإطفاء الشمعة">
+          <div class="candle">
+            <div class="flame" id="candleFlame"></div>
+            <div class="smoke" id="candleSmoke"></div>
+          </div>
+          <div class="cake-top-tier"></div>
+          <div class="cake-bottom-tier"></div>
+          <div class="cake-plate"></div>
+        </div>
+
+        <div id="blowBtnWrap" class="reveal-item">
+          <button class="btn primary" onclick="blowCandle()">انفخي الشمعة 🌬️</button>
+        </div>
+
+        <!-- Final Letter Card (Revealed after blowing candle) -->
+        <div class="final-letter" id="finalLetter">
+          <div class="kicker">HAPPY BIRTHDAY DODO ✦</div>
+          <p class="quote">
+            دودو، كل سنة وأنتِ بخير وأشوفك دايمًا فرحانة وضحكتك منورة الدنيا.<br><br>
+            النهارده مش مجرد يوم بيعدي في السنة، ده يوم مميز عشان فيه واحدة طيبة وجميلة تستاهل كل حاجة حلوة في الدنيا. أتمنى لكِ سنة جديدة تكون أخف وأحلى من أي سنة فاتت، سنة مليانة لحظات بتفرح قلبك بجد، ونجاحات تحسي بيها إن تعبك ومجهودك ما راحوش هدر.<br><br>
+            نفسي أشوفك دايمًا مطمّنة، راضية، وقريبة من كل حلم نفسك توصليله. خليكِ دايمًا زي ما أنتِ بروحك الحلوة وقلبك الصافي، لأن وجودك لوحده بيخلّي أيام كتير أهدى وأحلى.<br><br>
+            <em>بداية سنة جديدة سعيدة يا دودو، ويا رب كل أيامك الجاية تكون أعياد وفرح.</em>
+          </p>
+          <div class="sign">عيد ميلاد سعيد ✦</div>
+          <div class="actions" style="margin-top: 22px;">
+            <button class="btn primary" onclick="triggerConfetti(); playChime('celebrate')">زغرطي </button>
+            <button class="btn secondary" onclick="relightCandle()">ولّعي الشمعة تاني 🕯️</button>
+          </div>
+        </div>
+
+        <!-- Secret Wax-Sealed Envelope (Revealed after blowing candle) -->
+        <div class="secret-envelope-wrap" id="secretEnvelopeWrap">
+          <div class="envelope-box" id="secretEnvelope" onclick="unsealEnvelope(this)">
+            <div class="wax-seal">♥</div>
+            <div class="envelope-closed-hint">
+              <strong style="display:block; font-size:15px; color:#fff;">جواب سري لـ دودو 💌</strong>
+              <span style="font-size:12px; color:var(--muted);">اضغطي على الختم عشان تفتحيها</span>
+            </div>
+            <div class="envelope-secret-content">
+              <div class="kicker" style="margin-bottom:8px;">JUST FOR YOU</div>
+              <p style="margin:0; font-size:14.5px; line-height:1.95; color:#f8f7ff; text-align:right;">
+                دودو<br>
+                أنا آسف على كل حاجه زعلتك فيها زمان ومكنتش أقصد أنا عارف إني اوقات كتيرة كنت بضايقك ويمكن مكنتش بقدر احتوي زعلك ومكنتش بفهمك.<br><br>
+                يمكن في حاجات كتير كانت بتعدّي قدامي وأنا باصص لها من زاوية ضيقة ومش شايف الصورة كاملة، أو كنت بتضايق وبغلط في الكلام من غير ما أقف وأفهم إنتِ إيه ولا قصدك إيه، رغم إنك في كل مرة كنتِ بتيجي وتهدّي وتصلّحيني حتى وأنتِ مش غلطانة، وده كان بيخليني أحس قد إيه قلبك كبير وطيب وأكبر من زعلك بكتير.<br><br>
+                النهارده أنا فاهمك أكتر، وشايف حاجات كتير مكنتش شايفها قبل كده. عايزك تصدّقي إن عمري ما كنت أناني ولا استخفيت بيكي ولا بوجودك في حياتي؛ أنا بجد باقي عليكي أكتر بكتير مما تتخيلي، ومكانتك عندي ثابتة ومفيش أي حاجة تقدر تهزها.<br><br>
+                خليكي زي ما أنتِ، بطبيعتك وروحك الحلوة، أنتِ حلوة كده وهتفضلي حلوة كده دايمًا، ومش محتاجة تغيري أي حاجة في نفسك عشان ترضي حد أو عشان أي حاجة فاتت. أوعدك إني مش هضايقك تاني بكلام وحش أو يزعلك، وهفضل دايمًا شايفك أحسن صديقة في حياتي مهما حصل ومهما الأيام عدّت.<br><br>
+                <strong style="color:#ff9bcf;">بحبك أوي يا دودو، وربنا يفرح قلبك ويسعدك دايمًا.</strong>
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="actions reveal-item" style="margin-top: 26px;">
+          <button class="btn secondary" onclick="goToPage(1)"><span>→</span> رجوع للبداية</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>MADE WITH <span class="heart">♥</span> FOR DUNYA · JUST FOR YOU</footer>
+
+  <script>
+    /* ================= 1. SCROLL PROGRESS & PARALLAX ================= */
+    const scrollProgress = document.getElementById('scrollProgress');
+    const watermarkParallax = document.getElementById('watermarkParallax');
+    const orbParallax = document.getElementById('orbParallax');
+
+    window.addEventListener('scroll', () => {
+      const scrollTop = window.scrollY;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = docHeight > 0 ? Math.min(100, (scrollTop / docHeight) * 100) : 0;
+      if (scrollProgress) scrollProgress.style.width = `${progress}%`;
+      if (watermarkParallax) watermarkParallax.style.transform = `translateY(${scrollTop * -0.14}px)`;
+      if (orbParallax) orbParallax.style.transform = `translateY(${scrollTop * -0.22}px)`;
+    }, { passive: true });
+
+    /* ================= 2. MULTI-PAGE SPA NAVIGATION (2 PAGES) ================= */
+    let currentPage = 1;
+
+    function goToPage(pageNum) {
+      if (pageNum === currentPage) return;
+      playChime('nav');
+
+      document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+      document.querySelectorAll('.step-dot').forEach(d => d.classList.remove('active'));
+
+      const targetPage = document.getElementById(`page-${pageNum}`);
+      if (targetPage) {
+        targetPage.classList.add('active');
+        currentPage = pageNum;
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+
+      const targetDot = document.querySelector(`.step-dot[data-step="${pageNum}"]`);
+      if (targetDot) targetDot.classList.add('active');
+    }
+
+    function startJourney() {
+      triggerConfetti();
+      playChime('celebrate');
+      setTimeout(() => goToPage(2), 350);
+    }
+
+    /* ================= 3. ALL-PHONE HOME SCREEN SHORTCUT INSTALL ================= */
+    let deferredInstallPrompt = null;
+
+    (function injectManifest() {
+      try {
+        const iconSvg = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'%3E%3Crect width='192' height='192' rx='44' fill='%23080816'/%3E%3Ctext x='96' y='115' font-size='82' text-anchor='middle' fill='%23ff5db1'%3E✦%3C/text%3E%3C/svg%3E";
+        const manifestData = {
+          name: "DODO ✦ Just For You",
+          short_name: "DODO ✦",
+          start_url: ".",
+          scope: ".",
+          display: "standalone",
+          background_color: "#080816",
+          theme_color: "#080816",
+          icons: [
+            { src: iconSvg, sizes: "192x192", type: "image/svg+xml", purpose: "any" },
+            { src: iconSvg, sizes: "512x512", type: "image/svg+xml", purpose: "any" }
+          ]
+        };
+        const blob = new Blob([JSON.stringify(manifestData)], { type: 'application/manifest+json' });
+        const link = document.createElement('link');
+        link.rel = 'manifest';
+        link.href = URL.createObjectURL(blob);
+        document.head.appendChild(link);
+      } catch (err) {
+        // Ignore in restricted frames
+      }
+    })();
+
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();
+      deferredInstallPrompt = e;
+    });
+
+    function detectPhonePlatform() {
+      const ua = navigator.userAgent || '';
+      const isIOS = /iPhone|iPad|iPod/i.test(ua);
+      const isCriOS = /CriOS/i.test(ua);
+      const isAndroid = /Android/i.test(ua);
+      return { isIOS, isCriOS, isAndroid };
+    }
+
+    function initShortcutBanner() {
+      const isStandalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
+      const toast = document.getElementById('installToast');
+      if (isStandalone && toast) {
+        toast.style.display = 'none';
+        return;
+      }
+
+      const { isIOS, isCriOS, isAndroid } = detectPhonePlatform();
+      const descEl = document.getElementById('installDescText');
+      const stepsEl = document.getElementById('installStepsText');
+
+      if (descEl) {
+        if (isAndroid) {
+          descEl.textContent = 'Add DODO ✦ to your Android Home Screen for 1-tap access.';
+        } else if (isIOS) {
+          descEl.textContent = 'Add DODO ✦ to your iPhone Home Screen for 1-tap access.';
+        } else {
+          descEl.textContent = 'Pin DODO ✦ to your phone Home Screen for 1-tap access.';
+        }
+      }
+
+      if (stepsEl && isAndroid) {
+        stepsEl.innerHTML = `
+          <span class="step-chip">1. Tap OK / ⋮ Menu</span>
+          <span style="opacity:0.4;">→</span>
+          <span class="step-chip">2. Add to Home Screen</span>
+        `;
+      } else if (stepsEl && isIOS && isCriOS) {
+        stepsEl.innerHTML = `
+          <span class="step-chip">1. Tap Share ↗</span>
+          <span style="opacity:0.4;">→</span>
+          <span class="step-chip">2. Add to Home Screen</span>
+        `;
+      }
+    }
+
+    function hideInstallToastSmooth(toast) {
+      if (!toast) return;
+      toast.classList.add('hiding');
+      setTimeout(() => {
+        toast.style.display = 'none';
+      }, 560);
+    }
+
+    async function handleInstallOk() {
+      playChime('pop');
+      const toast = document.getElementById('installToast');
+      const cue = document.getElementById('browserPointerCue');
+      const { isIOS, isCriOS, isAndroid } = detectPhonePlatform();
+
+      // Smoothly collapse the top card so the heading & content slide up cleanly
+      hideInstallToastSmooth(toast);
+
+      // Native Android / Chromium install prompt when available
+      if (deferredInstallPrompt) {
+        try {
+          deferredInstallPrompt.prompt();
+          await deferredInstallPrompt.userChoice;
+        } catch (err) {
+          // Ignore prompt errors
+        }
+        deferredInstallPrompt = null;
+        return;
+      }
+
+      // Show directional browser cue for manual Add to Home Screen
+      if (cue) {
+        if (isIOS && isCriOS) {
+          cue.className = 'browser-pointer-cue chrome-pos';
+          cue.innerHTML = 'Tap Share icon at top-right ↗ then "Add to Home Screen"';
+        } else if (isIOS) {
+          cue.className = 'browser-pointer-cue safari-pos';
+          cue.innerHTML = 'Tap Share icon below ↓ then "Add to Home Screen"';
+        } else if (isAndroid) {
+          cue.className = 'browser-pointer-cue chrome-pos';
+          cue.innerHTML = 'Tap browser menu ⋮ then "Install app" or "Add to Home screen"';
+        } else {
+          cue.className = 'browser-pointer-cue safari-pos';
+          cue.innerHTML = 'Open browser menu / Share → "Add to Home Screen"';
+        }
+        cue.style.display = 'flex';
+        setTimeout(() => {
+          cue.style.display = 'none';
+        }, 7000);
+      }
+
+      // Trigger native share sheet on iOS if available
+      if (isIOS && navigator.share) {
+        try {
+          await navigator.share({
+            title: 'DODO ✦',
+            text: 'Pin DODO ✦ to Home Screen',
+            url: window.location.href
+          });
+        } catch (err) {
+          // User dismissed share sheet
+        }
+      }
+    }
+
+    /* ================= 4. INTERACTIVE CAKE & SECRET ENVELOPE ================= */
+    let candleBlown = false;
+
+    function blowCandle() {
+      if (candleBlown) return;
+      candleBlown = true;
+
+      const flame = document.getElementById('candleFlame');
+      const smoke = document.getElementById('candleSmoke');
+      const letter = document.getElementById('finalLetter');
+      const envelopeWrap = document.getElementById('secretEnvelopeWrap');
+      const instruction = document.getElementById('cakeInstruction');
+      const btnWrap = document.getElementById('blowBtnWrap');
+
+      flame.classList.add('out');
+      smoke.classList.remove('rising');
+      void smoke.offsetWidth;
+      smoke.classList.add('rising');
+
+      playChime('celebrate');
+      triggerConfetti(innerWidth / 2, innerHeight * 0.4, 260);
+
+      instruction.textContent = 'أمنيتك وصلت للسماء ✨ كل سنة وأنتِ طيبة يا دودو!';
+      btnWrap.style.display = 'none';
+
+      setTimeout(() => {
+        letter.classList.add('visible');
+        envelopeWrap.classList.add('visible');
+      }, 450);
+    }
+
+    function relightCandle() {
+      candleBlown = false;
+      document.getElementById('candleFlame').classList.remove('out');
+      document.getElementById('finalLetter').classList.remove('visible');
+      document.getElementById('secretEnvelopeWrap').classList.remove('visible');
+      document.getElementById('secretEnvelope').classList.remove('unsealed');
+      document.getElementById('blowBtnWrap').style.display = 'block';
+      document.getElementById('cakeInstruction').textContent = 'اتمني أمنية تانية واضغطي على الشمعة 🕯️';
+      playChime('nav');
+    }
+
+    function unsealEnvelope(el) {
+      if (el.classList.contains('unsealed')) return;
+      el.classList.add('unsealed');
+      playChime('celebrate');
+      const rect = el.getBoundingClientRect();
+      triggerConfetti(rect.left + rect.width / 2, rect.top + rect.height / 2, 130);
+    }
+
+    /* ================= 5. SPOTLIGHT & CLICK MAGIC SPARKLES ================= */
+    const spotlight = document.getElementById('spotlight');
+    window.addEventListener('pointermove', (e) => {
+      if (spotlight) {
+        spotlight.style.left = `${e.clientX}px`;
+        spotlight.style.top = `${e.clientY}px`;
+      }
+    }, { passive: true });
+
+    const clickSparkleSymbols = ['✦', '✨', '♥', '⋆', '✧'];
+    window.addEventListener('pointerdown', (e) => {
+      initAudio();
+      for (let i = 0; i < 4; i++) {
+        const sp = document.createElement('span');
+        sp.className = 'click-sparkle';
+        sp.textContent = clickSparkleSymbols[Math.floor(Math.random() * clickSparkleSymbols.length)];
+        sp.style.left = `${e.clientX}px`;
+        sp.style.top = `${e.clientY}px`;
+        sp.style.color = colors[Math.floor(Math.random() * colors.length)];
+        const angle = (Math.PI * 2 * i) / 4 + (Math.random() - 0.5);
+        const dist = 28 + Math.random() * 34;
+        sp.style.setProperty('--dx', `${Math.cos(angle) * dist}px`);
+        sp.style.setProperty('--dy', `${Math.sin(angle) * dist}px`);
+        document.body.appendChild(sp);
+        setTimeout(() => sp.remove(), 950);
+      }
+    }, { passive: true });
+
+    /* ================= 6. SYNTHESIZED WEB AUDIO ================= */
+    let audioCtx = null;
+
+    function initAudio() {
+      try {
+        if (!audioCtx) {
+          const AudioContext = window.AudioContext || window.webkitAudioContext;
+          if (AudioContext) audioCtx = new AudioContext();
+        }
+        if (audioCtx && audioCtx.state === 'suspended') {
+          audioCtx.resume();
+        }
+      } catch (err) {
+        // Ignore restricted audio environments
+      }
+    }
+
+    function playChime(type) {
+      try {
+        initAudio();
+        if (!audioCtx) return;
+
+        const now = audioCtx.currentTime;
+        const notes = {
+          nav: [523.25, 659.25],
+          flip: [440, 587.33],
+          pop: [587.33, 783.99, 1046.5],
+          celebrate: [523.25, 659.25, 783.99, 1046.5, 1318.5]
+        }[type] || [523.25];
+
+        notes.forEach((freq, idx) => {
+          const osc = audioCtx.createOscillator();
+          const gain = audioCtx.createGain();
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(freq, now + idx * 0.06);
+
+          gain.gain.setValueAtTime(0.001, now + idx * 0.06);
+          gain.gain.exponentialRampToValueAtTime(0.065, now + idx * 0.06 + 0.02);
+          gain.gain.exponentialRampToValueAtTime(0.0001, now + idx * 0.06 + 0.35);
+
+          osc.connect(gain);
+          gain.connect(audioCtx.destination);
+          osc.start(now + idx * 0.06);
+          osc.stop(now + idx * 0.06 + 0.38);
+        });
+      } catch (err) {
+        // Ignore audio errors
+      }
+    }
+
+    /* ================= 7. CONFETTI PARTICLE ENGINE ================= */
+    const canvas = document.getElementById('confetti');
+    const ctx = canvas.getContext('2d');
+    let pieces = [];
+    let raf = null;
+
+    function resize() {
+      canvas.width = innerWidth * devicePixelRatio;
+      canvas.height = innerHeight * devicePixelRatio;
+      ctx.setTransform(devicePixelRatio, 0, 0, devicePixelRatio, 0, 0);
+    }
+    addEventListener('resize', resize);
+    resize();
+
+    const colors = ['#ff5db1', '#a78bfa', '#67e8f9', '#ffe29a', '#ffffff'];
+
+    function triggerConfetti(originX = innerWidth * 0.5, originY = innerHeight * 0.48, count = 190) {
+      for (let i = 0; i < count; i++) {
+        pieces.push({
+          x: originX + (Math.random() - 0.5) * 160,
+          y: originY + (Math.random() - 0.5) * 70,
+          vx: (Math.random() - 0.5) * 11,
+          vy: -Math.random() * 11 - 2.5,
+          g: 0.13 + Math.random() * 0.11,
+          size: 3 + Math.random() * 5,
+          rot: Math.random() * 6,
+          vr: (Math.random() - 0.5) * 0.2,
+          color: colors[Math.floor(Math.random() * colors.length)],
+          life: 100 + Math.random() * 80,
+          shape: Math.random() > 0.5 ? 'rect' : 'circle'
+        });
+      }
+      if (!raf) drawConfetti();
+    }
+
+    function drawConfetti() {
+      ctx.clearRect(0, 0, innerWidth, innerHeight);
+      pieces = pieces.filter(p => p.life > 0 && p.y < innerHeight + 30);
+
+      for (const p of pieces) {
+        p.x += p.vx;
+        p.y += p.vy;
+        p.vy += p.g;
+        p.vx *= 0.992;
+        p.rot += p.vr;
+        p.life--;
+
+        ctx.save();
+        ctx.translate(p.x, p.y);
+        ctx.rotate(p.rot);
+        ctx.globalAlpha = Math.min(1, p.life / 30);
+        ctx.fillStyle = p.color;
+
+        if (p.shape === 'rect') {
+          ctx.fillRect(-p.size / 2, -p.size / 2, p.size, p.size * 1.7);
+        } else {
+          ctx.beginPath();
+          ctx.arc(0, 0, p.size / 2, 0, Math.PI * 2);
+          ctx.fill();
+        }
+        ctx.restore();
+      }
+
+      if (pieces.length) {
+        raf = requestAnimationFrame(drawConfetti);
+      } else {
+        cancelAnimationFrame(raf);
+        raf = null;
+        ctx.clearRect(0, 0, innerWidth, innerHeight);
+      }
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      initShortcutBanner();
+    });
+  </script>
+</body>
+
+</html>
